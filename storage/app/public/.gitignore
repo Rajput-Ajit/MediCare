@@ -1,2 +1,30 @@
-*
-!.gitignore
+/vendor
+/node_modules
+/public/storage
+/storage/*.key
+/storage/app/public
+.env
+.env.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+/.idea
+/.vscode
+.DS_Store
+
+# Laravel cache files
+/bootstrap/cache/*.php
+/bootstrap/cache/packages.php
+/bootstrap/cache/services.php
+
+# Testing
+coverage/
+
+# Composer
+composer.lock
+
+# Optional: ignore build files
+/public/hot
+/public/build

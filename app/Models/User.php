@@ -18,10 +18,30 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'firstName',
+        'lastName',
+        'date_of_birth',
         'email',
-        'password',
+        'phone',
+        'alternate_phone',
+        'emergency_contact',
+        'allergies',
+        'medications',
+        'medical_conditions',
+        'height_cm',
+        'weight_kg',
+        'ageGroup',
+        'gender',
+        'blood_group',
+        'marital_status',
+        'userType',
+        'status',
+        'profile_image',
+        'otp',
+        'otp_time'
     ];
+
+    public $timestamps = false; // disables automatic created_at and updated_at
 
     /**
      * The attributes that should be hidden for serialization.
@@ -44,5 +64,14 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // relationship with addresses     -> $user->addresses;
+    public function addresses(){
+        return $this->hasMany(UserAddress::class);
+    }
+
+    public function orders(){
+        return $this->hasMany(Order::class);
     }
 }

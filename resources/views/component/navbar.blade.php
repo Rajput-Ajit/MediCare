@@ -14,28 +14,35 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link @if($page == 'Home') active @endif" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link @if($page == 'Medicines') active @endif" href="/medicines">Medicines</a></li>
-                    <li class="nav-item"><a class="nav-link @if($page == 'Health_Products') active @endif" href="/health-products">Health Products</a></li>
-                    <li class="nav-item"><a class="nav-link @if($page == 'Upload Prescription') active @endif" href="/upload-prescription">Upload Prescription</a></li>
+                    <li class="nav-item"><a class="nav-link @if($page == 'Medicines') active @endif" href="/medicines">All Medicines</a></li>
+                    <li class="nav-item"><a class="nav-link @if($page == 'Upload_Prescription') active @endif" href="/upload-prescription">Upload Prescription</a></li>
                 </ul>
 
                 <!-- Search -->
-                <div class="nav-search-wrapper d-flex align-items-center position-relative me-3">
-                    <i class="fas fa-search search-icon me-2"></i>
-                    <input type="text" class="search-input form-control" placeholder="Search medicines, health products...">
-                    <button class="btn search-btn">Search</button>
-                </div>
+                <form action="/medicines">
+                    <div class="nav-search-wrapper d-flex align-items-center position-relative me-3 @if(isset($oldSearch) && !empty($oldSearch)) active  @endif)">
+                        <i class="fas fa-search search-icon me-2"></i>
+                        <input type="text" class="search-input form-control"  name="search" value="{{$oldSearch ? $oldSearch : ''}}" placeholder="Search medicines, health products...">
+                        <button class="btn search-btn" type="submit">Search</button>
+                    
+                    </div>
+                </form>
 
                 <!-- Cart/Login -->
                 <ul class="navbar-nav">
                     <li class="nav-item position-relative">
-                        <a class="nav-link cart-link" href="#">
+                        <a class="nav-link cart-link @if($page == 'Cart') active @endif"" href="/cart">
                             <i class="fas fa-shopping-cart me-1"></i>Cart 
-                            <span class="badge bg-danger cart-badge">3</span>
+                            <span class="badge bg-danger cart-badge" id="cartQty">{{ session('cartQty')}}</span>
                         </a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-user me-1"></i>Login</a></li>
+                    <li class="nav-item"><a class="nav-link @if($page == 'profile') active @endif" href="/profile"><i class="fas fa-user me-1"></i>{{session('login_user', 'User')}}</a></li>
                 </ul>
             </div>
         </div>
     </nav>
+    <!--
+        <pre>
+            {{ print_r(session()->all(), true) }}
+        </pre>
+    -->

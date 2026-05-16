@@ -9,4 +9,8 @@ class HealthProductsController extends Controller
     function products(){
         return view("healthproducts");
     }
+
+    function uploadPrescription(){
+        return view("uploadPrescription");
+    }
 }

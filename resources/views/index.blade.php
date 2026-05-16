@@ -693,12 +693,13 @@
     <!-- ================================
          NAVIGATION BAR
          ================================ -->
-    @include("component.navbar", ["page" => "Home"]);
+    @include("component.navbar", ["page" => "Home", 'oldSearch' => '', 'qty' => $qty])
 
     <!-- ================================
          HERO SECTION
          ================================ -->
     <section class="hero-section">
+        
         <div class="hero-bg"></div>
         <div class="container position-relative z-1">
             <div class="row align-items-center">
@@ -734,40 +735,53 @@
             <h2 class="text-center mb-5 text-primary-custom">Shop by Category</h2>
             <div class="row g-4 category-row">
                 <div class="col-lg-2 col-md-4 col-6">
-                    <div class="category-card" data-color="#10847e">
-                        <div class="category-icon"><i class="fas fa-tablets fa-2x text-white"></i></div>
-                        <h6 class="card-title">Pain Relief</h6>
-                    </div>
+                    <a href="{{route('medicine', ['category' => 'pain-relief'])}}" class="text-decoration-none">
+                        <div class="category-card" data-color="#10847e">
+                            <div class="category-icon"><i class="fas fa-tablets fa-2x text-white"></i></div>
+                            <h6 class="card-title">Pain Relief</h6>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 col-6">
+                    <a href="{{route('medicine', ['category' => 'diabetes'])}}" class="text-decoration-none">
+                        <div class="category-card" data-color="#ff6b35">
+                            <div class="category-icon"><i class="fas fa-syringe fa-2x text-white"></i></div>
+                            <h6 class="card-title">Diabetes Care</h6>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6">
+                    <a href="{{route('medicine', ['category' => 'cardiac'])}}" class="text-decoration-none">
+                        <div class="category-card" data-color="#10847e">
+                            <div class="category-icon"><i class="fas fa-heartbeat fa-2x text-white"></i></div>
+                            <h6 class="card-title">Cardiac Care</h6>
+                        </div>
+                    </a>
                 </div>
                 <div class="col-lg-2 col-md-4 col-6">
                     <div class="category-card" data-color="#ff6b35">
-                        <div class="category-icon"><i class="fas fa-heartbeat fa-2x text-white"></i></div>
-                        <h6 class="card-title">Diabetes Care</h6>
+                        <a href="{{route('medicine', ['category' => 'antibiotics'])}}" class="text-decoration-none">
+                            <div class="category-icon"><i class="fas fa-child fa-2x text-white"></i></div>
+                            <h6 class="card-title">Antibiotics</h6>
+                        </a> 
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 col-6">
-                    <div class="category-card" data-color="#10847e">
-                        <div class="category-icon"><i class="fas fa-eye fa-2x text-white"></i></div>
-                        <h6 class="card-title">Eye Care</h6>
-                    </div>
+                    <a href="{{route('medicine', ['category' => 'vitamins'])}}" class="text-decoration-none">
+                        <div class="category-card" data-color="#10847e">
+                            <div class="category-icon"><i class="fas fa-spa fa-2x text-white"></i></div>
+                            <h6 class="card-title">Vitamins</h6>
+                        </div>
+                    </a>
                 </div>
                 <div class="col-lg-2 col-md-4 col-6">
-                    <div class="category-card" data-color="#ff6b35">
-                        <div class="category-icon"><i class="fas fa-child fa-2x text-white"></i></div>
-                        <h6 class="card-title">Baby Care</h6>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-6">
-                    <div class="category-card" data-color="#10847e">
-                        <div class="category-icon"><i class="fas fa-spa fa-2x text-white"></i></div>
-                        <h6 class="card-title">Skincare</h6>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-6">
-                    <div class="category-card" data-color="#ff6b35">
-                        <div class="category-icon"><i class="fas fa-dumbbell fa-2x text-white"></i></div>
-                        <h6 class="card-title">Fitness</h6>
-                    </div>
+                    <a href="{{route('medicine', ['category' => 'respiratory'])}}" class="text-decoration-none">
+                        <div class="category-card" data-color="#ff6b35">
+                            <div class="category-icon"><i class="fas fa-lungs fa-2x text-white"></i></div>
+                            <h6 class="card-title">Respiratory</h6>
+                        </div>
+                    </a>    
                 </div>
             </div>
         </div>
@@ -784,24 +798,25 @@
                     <p class="text-muted">Top selling medicines and health products</p>
                 </div>
                 <div class="col-auto">
-                    <a href="#" class="btn btn-outline-primary">View All</a>
+                    <a href="{{route('medicine')}}" class="btn btn-outline-primary">View All</a>
                 </div>
             </div>
             
             <div class="row g-4">
-                <!-- Product 1 -->
+                <!-- Products -->
+                 @foreach($featuedProducts as $product)
                 <div class="col-lg-3 col-md-6">
                     <div class="card product-card h-100 border-0 shadow-sm position-relative text-center">
-                        <img src="https://ayushcare.in/cdn/shop/products/Calpol500.jpg?v=1747141376" class="card-img-top product-img fixed-img" alt="Medicine">
+                        <img src="{{url('storage/'.$product->productImages)}}" class="card-img-top product-img fixed-img" alt="Medicine">
                         <div class="card-body">
-                            <h6 class="card-title">Paracetamol 500mg</h6>
-                            <p class="text-muted small">Fever & Pain Relief</p>
+                            <h6 class="card-title">{{$product->medicineName}}</h6>
+                            <p class="text-muted small">{{$product->category}}</p>
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <div>
-                                    <span class="h5 text-primary-custom">₹25</span>
-                                    <small class="text-decoration-line-through text-muted">₹30</small>
+                                    <span class="h5 text-primary-custom">₹{{$product->sellingPrice}}</span>
+                                    <small class="text-decoration-line-through text-muted">₹{{$product->mrp}}</small>
                                 </div>
-                                <span class="badge bg-success">17% OFF</span>
+                                <span class="badge bg-success">{{number_format((($product->mrp - $product->sellingPrice) / $product->mrp) * 100, 2) }}% OFF</span>
                             </div>
                             <button class="btn btn-primary-custom w-100 mt-2 add-cart-btn">
                                 <i class="fas fa-cart-plus me-2"></i>Add to Cart
@@ -813,73 +828,7 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Product 2 -->
-                <div class="col-lg-3 col-md-6">
-                    <div class="card product-card h-100 border-0 shadow-sm position-relative text-center">
-                        <img src="https://images.apollo247.in/pub/media/catalog/product/C/R/CRO0091_1.jpg" class="card-img-top product-img fixed-img" alt="Medicine">
-                        <div class="card-body">
-                            <h6 class="card-title">Crocin Advance</h6>
-                            <p class="text-muted small">Fast Pain Relief</p>
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <div>
-                                    <span class="h5 text-primary-custom">₹45</span>
-                                    <small class="text-decoration-line-through text-muted">₹50</small>
-                                </div>
-                                <span class="badge bg-success">10% OFF</span>
-                            </div>
-                            <button class="btn btn-primary-custom w-100 mt-2 add-cart-btn">
-                                <i class="fas fa-cart-plus me-2"></i>Add to Cart
-                            </button>
-                        </div>
-                        <div class="added-popup"><i class="fas fa-check-circle me-2"></i>Added Successfully</div>
-                    </div>
-                </div>
-
-                <!-- Product 3 -->
-                <div class="col-lg-3 col-md-6">
-                    <div class="card product-card h-100 border-0 shadow-sm position-relative text-center">
-                        <img src="https://almscare.com/wp-content/uploads/2024/06/Screenshot-2024-06-29-130029.png" class="card-img-top product-img fixed-img" alt="Medicine">
-                        <div class="card-body">
-                            <h6 class="card-title">Vitamin D3</h6>
-                            <p class="text-muted small">Bone Health Supplement</p>
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <div>
-                                    <span class="h5 text-primary-custom">₹120</span>
-                                    <small class="text-decoration-line-through text-muted">₹150</small>
-                                </div>
-                                <span class="badge bg-success">20% OFF</span>
-                            </div>
-                            <button class="btn btn-primary-custom w-100 mt-2 add-cart-btn">
-                                <i class="fas fa-cart-plus me-2"></i>Add to Cart
-                            </button>
-                        </div>
-                        <div class="added-popup"><i class="fas fa-check-circle me-2"></i>Added Successfully</div>
-                    </div>
-                </div>
-
-                <!-- Product 4 -->
-                <div class="col-lg-3 col-md-6">
-                    <div class="card product-card h-100 border-0 shadow-sm position-relative text-center">
-                        <img src="https://www.adegenpharma.com/wp-content/uploads/2023/02/OMILESS-20-CAPSULE.jpg" class="card-img-top product-img fixed-img" alt="Medicine">
-                        <div class="card-body">
-                            <h6 class="card-title">Omeprazole 20mg</h6>
-                            <p class="text-muted small">Acidity Relief</p>
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <div>
-                                    <span class="h5 text-primary-custom">₹85</span>
-                                    <small class="text-decoration-line-through text-muted">₹100</small>
-                                </div>
-                                <span class="badge bg-success">15% OFF</span>
-                            </div>
-                            <button class="btn btn-primary-custom w-100 mt-2 add-cart-btn">
-                                <i class="fas fa-cart-plus me-2"></i>Add to Cart
-                            </button>
-                        </div>
-                        <div class="added-popup"><i class="fas fa-check-circle me-2"></i>Added Successfully</div>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
         </div>
     </section>
